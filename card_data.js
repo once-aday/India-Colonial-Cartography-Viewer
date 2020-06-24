@@ -20,7 +20,7 @@ var cardData = {
     
     '9': [['images/carrey_crop.png'],"In America there was little threat of international copyright infringement and Carey <a href='https://oshermaps.org/exhibitions/map-commentaries/maine-us-version-best-selling-european-historical-atlas-ca1800' target='_blank'>freely reproduced these British maps.</a>", 0, ["layer_1", 0, [-475,615]], "none"],
     
-    '10': [['images/british_pos.png'],"Here we observe 'British Pos' signfiying a broad range of land with a dotted perimeter as a British possesion. This was a transitory time of political and colonial tumult.", 0, ["layer_1", 2, [-380,720]], "none"],
+    '10': [['images/british_pos.png'],"Here we observe 'British Pos' signfiying a broad range of land with a dotted perimeter as a British possesion. This was a transitory time of political and colonial turn-over.", 0, ["layer_1", 2, [-380,720]], "none"],
     
     '11': [['images/little_known_to.png'],"The information that makes it back to English Geographers is likely to be more influenced by British explorers rather than locals who may know the land and it's history more intimately. In fact, the map repeatedly points out areas that are 'Little known to Europeans'", 0, ["layer_1", 2, [-450,570]], "none"],
     
