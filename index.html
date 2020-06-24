@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+      <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script type="text/javascript" src="card_data.js"></script> 
+
+   <style>
+    #iiif-map {
+        margin: -8px;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+        z-index: -1;
+     }
+    body {
+        background:url(images/bedge_grunge.png);
+        font-family: 'Alice', serif;
+    }
+    #btn-next {
+        display: inline;
+        float: right;
+        font-size: 16px;
+        padding-right: 10px;
+        cursor: pointer;
+    }
+    #btn-back {
+        display: inline;
+        font-size: 16px;
+        float: left;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        cursor: pointer;
+    }
+       
+   .card {
+      height: 500px;
+      width: 250px;
+      background-color:rgb(201, 183, 162);
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 20px;
+       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+       transition: 0.3s;
+       border-radius: 5px; /* 5px rounded corners */
+       position:absolute;
+    }
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .card-container {
+        float: left;
+        overflow-y:auto
+    }
+    .card-footer {
+        display: inline;
+        position:absolute;
+        bottom:0;
+        width:100%;
+        background-color: rgb(193, 171, 145);
+        padding-top: 10px;
+    }
+   #card-text {
+       padding: 10px;
+       font-size: small;
+       line-height: 1.2;
+/*       text-align: center;*/
+   }
+   .container {
+       display:inline-block;     
+   }
+   #title {
+       font-size: x-large;
+       padding: 20px 100px 20px 20px;
+       text-shadow : 1.5px 1px 0px black;
+       color:#ffffff;
+       background-color: rgba(38, 19, 0, 0.39);
+       margin-right: -10px;
+       margin-left: -10px;
+   }
+    #card-img {
+        height: 60%;
+        width:100%;
+        content:url(images/carrey_crop.png);
+    }
+   .img-2 {
+        height: 70%;
+        width:100%;
+        content:url(images/globe_hand_crop.png);
+    }
+   </style>
+  </head>
+  <body>
+          <div id="iiif-map"></div>
+    <div id='title'>Colonial Cartography: From the Best Authorities</div>
+      <div class="card-container">
+      <div class="card">
+          <div id="card-img">
+          </div>
+          <div id="card-text">
+          <span>This 1800 Map of India was <a href='https://collections.leventhalmap.org/search/commonwealth:3f462z73w' target='_blank'>published in Philadelphia, PA</a> by Matthew Carey as part of a “General Atlas” during a century when cartography was beginning to establish itself as an important tool for political and societal influence in America.</span> 
+              </div>
+          <div class="card-footer">
+              <div id='btn-back'>Back</div>
+              <div id='btn-next'>Next</div>
+          </div>  
+        </div>
+                 
+    </div>
+
+     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+    <script src="https://cdn.rawgit.com/mejackreed/Leaflet-IIIF/v3.0.0/leaflet-iiif.js"></script>
+    <!-- make sure to import Leaflet-IIIF *after* the main Leaflet package -->
+    <script>
+    
+
+    var map = L.map('iiif-map', {
+        center: [-550,525],
+        crs: L.CRS.Simple,
+        zoom: 0,
+        zoomControl: false
+    });
+        
+    new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+//    var scene1_latlon = [150.5, 30.5];
+//    map.setView(scene1_latlon)
+        
+//      var chamizalLayer = new 
+      // Original Example: https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:0r96fk817/info.json'
+//      1800 India Map: https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:3f462z745/info.json 
+            
+    var iiif_url = 'https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:3f462z745/info.json';
+        
+    var layer1 = L.tileLayer.iiif(iiif_url, {
+        format: 'png',
+        fitBounds: false,
+        setMaxBounds: false,
+        quality: 'color'
+      }
+    ).addTo(map);
+    
+    
+        
+        
+//    var layer2 = L.tileLayer.iiif(iiifUrl, {
+//        quality: 'gray'
+//      }
+//    ).addTo(map);
+        
+    var currentCardNumber = 1;
+    
+    $(document).ready(function() {
+        $('#btn-next').click(function(event) {
+            console.log("Next Button pressed")
+            if (currentCardNumber < 14) {
+                currentCardNumber += 1
+                renderCard(currentCardNumber)
+            } else {
+                renderCard(1)
+                currentCardNumber = 1
+            }
+
+        });
+        $('#btn-back').click(function(event) {
+            console.log("Back Button pressed")
+            if (currentCardNumber > 1) {
+                currentCardNumber -= 1
+                renderCard(currentCardNumber)
+            } else {
+                renderCard(1)
+                currentCardNumber = 1
+            }
+            
+            
+        });
+    }); 
+
+
+function adjustMap(newZoom, newXY) {
+    map.flyTo(newXY, newZoom)
+}
+        
+function loadImage() {
+  // remove image layer if it already exists
+  if (map.hasLayer(image)) {
+    map.removLayer(image);
+  }
+  else {
+    image.addTo(map);
+  }
+}
+        
+function renderCard(card_number) {
+    console.log("Rendering new Card Number: " + String(card_number))
+//    var cardImg = document.getElementById('card-img');
+//    var cardText = document.getElementById('card-text');
+    
+    var newImg = cardData[String(card_number)][0];
+    var newText = cardData[String(card_number)][1];
+    var newLayerOption = cardData[String(card_number)][2]
+    var newLayer = cardData[String(card_number)][3][1]
+    var mapAdjustOption = cardData[String(card_number)][3]
+    var newZoom = cardData[String(card_number)][3][1]
+    var newXY = cardData[String(card_number)][3][2]
+    
+    
+            console.log("New Card Img: " + newImg[1])
+//            console.log("New Card XY: " + newXY)
+    
+    console.log(newText)
+    $("#card-img").css({content:'url(' + newImg[0] + ')'});
+    $("#card-text span").html(newText); 
+    
+    
+    
+    // Check if layer change
+    
+    if (newLayerOption == false)  {
+        // Remain on Layer
+        console.log("Remain Layer")
+        
+        // if layer1 (base layer) not present, add to map AND remove all other layers
+        if (map.hasLayer(layer1) == false) {
+            map.eachLayer(function(layer){
+                layer.remove()
+            });
+            map.addLayer(layer1);
+        }
+        
+        
+        if (mapAdjustOption) {
+            console.log("Adjust Map")
+            adjustMap(newZoom, newXY)
+            
+        } else {
+            
+        }
+        
+    } else {
+        // Switch layer
+        console.log("Switch Layer")
+        map.removeLayer(layer1);
+        
+        var bounds = [[0,0], [100,100]];
+        var image = L.imageOverlay(newImg[1], bounds).addTo(map);
+        map.fitBounds(bounds);
+        
+        if (mapAdjustOption) {
+            console.log("Adjust Map");
+            adjustMap(newZoom, newXY)
+            
+        } else {
+            
+        }
+    }
+    
+    // Check if Map zoom/xy adjustments
+    
+    // Check if Custom Map Effects
+    
+    
+}
+
+function switchLayer() {
+    console.log("Switching Layer..")
+}
+        
+    </script>
+  </body>
+</html>
