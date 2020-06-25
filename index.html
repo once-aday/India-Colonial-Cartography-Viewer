@@ -131,13 +131,7 @@
     });
         
     new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
-//    var scene1_latlon = [150.5, 30.5];
-//    map.setView(scene1_latlon)
         
-//      var chamizalLayer = new 
-      // Original Example: https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:0r96fk817/info.json'
-//      1800 India Map: https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:3f462z745/info.json 
-            
     var iiif_url = 'https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:3f462z745/info.json';
         
     var layer1 = L.tileLayer.iiif(iiif_url, {
@@ -147,21 +141,13 @@
         quality: 'color'
       }
     ).addTo(map);
-    
-    
-        
-        
-//    var layer2 = L.tileLayer.iiif(iiifUrl, {
-//        quality: 'gray'
-//      }
-//    ).addTo(map);
         
     var currentCardNumber = 1;
     
     $(document).ready(function() {
         $('#btn-next').click(function(event) {
-            console.log("Next Button pressed")
-            if (currentCardNumber < 14) {
+//            console.log("Next Button pressed")
+            if (currentCardNumber < 17) {
                 currentCardNumber += 1
                 renderCard(currentCardNumber)
             } else {
@@ -171,7 +157,7 @@
 
         });
         $('#btn-back').click(function(event) {
-            console.log("Back Button pressed")
+//            console.log("Back Button pressed")
             if (currentCardNumber > 1) {
                 currentCardNumber -= 1
                 renderCard(currentCardNumber)
@@ -200,7 +186,7 @@ function loadImage() {
 }
         
 function renderCard(card_number) {
-    console.log("Rendering new Card Number: " + String(card_number))
+//    console.log("Rendering new Card Number: " + String(card_number))
 //    var cardImg = document.getElementById('card-img');
 //    var cardText = document.getElementById('card-text');
     
@@ -212,15 +198,11 @@ function renderCard(card_number) {
     var newZoom = cardData[String(card_number)][3][1]
     var newXY = cardData[String(card_number)][3][2]
     
+//    console.log("New Card Img: " + newImg[1])
     
-            console.log("New Card Img: " + newImg[1])
-//            console.log("New Card XY: " + newXY)
-    
-    console.log(newText)
+//    console.log(newText)
     $("#card-img").css({content:'url(' + newImg[0] + ')'});
     $("#card-text span").html(newText); 
-    
-    
     
     // Check if layer change
     
@@ -238,7 +220,7 @@ function renderCard(card_number) {
         
         
         if (mapAdjustOption) {
-            console.log("Adjust Map")
+//            console.log("Adjust Map")
             adjustMap(newZoom, newXY)
             
         } else {
@@ -247,7 +229,7 @@ function renderCard(card_number) {
         
     } else {
         // Switch layer
-        console.log("Switch Layer")
+//        console.log("Switch Layer")
         map.removeLayer(layer1);
         
         var bounds = [[0,0], [100,100]];
@@ -261,17 +243,11 @@ function renderCard(card_number) {
         } else {
             
         }
-    }
-    
-    // Check if Map zoom/xy adjustments
-    
-    // Check if Custom Map Effects
-    
-    
+    } 
 }
 
 function switchLayer() {
-    console.log("Switching Layer..")
+//    console.log("Switching Layer..")
 }
         
     </script>
