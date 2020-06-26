@@ -34,7 +34,7 @@ var cardData = {
     
     '16': [['images/globe_hand_full.jpg'],"Kelso Continues.. '<i>As such, the map is viewed as a resource of knowledge which can be used to reflect (both consciously and subconscously) the ideology of the powerful.</i>'", 0, ["layer_1", 0, [-475,475]], "none"],
     
-    '17': [['images/ganges_canal.jpg'],"With no reference to indegenous data sources, and printed admissions of european knowledge gaps, the prospect of accuracy becomes dubious. The 'best authorities' that the map proclaims to have been involved were perhaps the best made available, but not the best possible.", 0, ["layer_1", 1, [-710,755]], "none"],
+    '17': [['images/ganges_canal.jpg'],"With no reference to engagement with local experts, and printed admissions of european knowledge gaps, the prospect of accuracy becomes dubious. The 'best authorities' that the map proclaims to have been involved were perhaps the best made available, but not the best possible.", 0, ["layer_1", 1, [-710,755]], "none"],
      
 }
 
