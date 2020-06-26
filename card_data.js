@@ -22,7 +22,7 @@ var cardData = {
     
     '10': [['images/british_pos.png'],"Here we observe 'British Pos' signfiying a broad range of land with a dotted perimeter as a British possesion. This was a transitory time of political and colonial turn-over.", 0, ["layer_1", 2, [-380,720]], "none"],
     
-    '11': [['images/little_known_to.png'],"The information that makes it back to English Geographers is likely to be more influenced by British explorers rather than locals who may know the land and it's history more intimately. In fact, the map repeatedly points out areas that are 'Little known to Europeans'", 0, ["layer_1", 2, [-450,570]], "none"],
+    '11': [['images/little_known_to.png'],"The information that makes it back to cartographers is likely to be more influenced by British explorer's perspectives rather than locals who may know the land and it's history more intimately. In fact, the map repeatedly points out areas that are 'Little known to Europeans'", 0, ["layer_1", 2, [-450,570]], "none"],
     
     '12': [['images/little_known_to2.png'],"Again we see an area little known to Europeans. There are many admissions of ignorance within the map itself. The borders are nearly all dotted lines, typically signifiying an estimated boundary, perhaps even a <i>lack</i> of authority.", 0, ["layer_1", 2, [-310,370]], "none"],
     
